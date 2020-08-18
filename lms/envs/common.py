@@ -2765,7 +2765,7 @@ COURSE_DISCOVERY_MEANINGS = {
         },
     },
     'course_category': {
-        'name': u'Kategoria',
+        'name': _(u'Kategoria'),
         'terms': {b[0]: b[1] for b in ALL_COURSE_CATEGORY},
     },
     'organizer': {

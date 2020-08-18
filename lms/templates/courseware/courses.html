@@ -2,6 +2,7 @@
   import json
   from django.utils.translation import ugettext as _
   from openedx.core.djangolib.js_utils import dump_js_escaped_json
+  from openedx.core.djangolib.lazy_encoder import LazyEncoder
 %>
 <%inherit file="../main.html" />
 <%
@@ -19,7 +20,7 @@
   % endfor
   <%static:require_module module_name="js/discovery/discovery_factory" class_name="DiscoveryFactory">
     DiscoveryFactory(
-      ${course_discovery_meanings | n, dump_js_escaped_json},
+      ${dump_js_escaped_json(course_discovery_meanings,cls=LazyEncoder)},
       getParameterByName('search_query'),
       "${user_language}",
       "${user_timezone}"
