@@ -994,7 +994,6 @@ def program_marketing(request, program_uuid):
 
     return render_to_response('courseware/program_marketing.html', context)
 
-
 @transaction.non_atomic_requests
 @login_required
 @cache_control(no_cache=True, no_store=True, must_revalidate=True)
@@ -1096,6 +1095,12 @@ def _progress(request, course_key, student_id):
         response = render_to_response('courseware/progress.html', context)
 
     return response
+
+
+def get_course_progress(request, course, student):
+    course_grade = CourseGradeFactory().read(student, course)
+    courseware_summary = course_grade.chapter_grades.values()
+    return courseware_summary
 
 
 def _downloadable_certificate_message(course, cert_downloadable_status):

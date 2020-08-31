@@ -47,28 +47,6 @@ username = get_enterprise_learner_generic_name(request) or student.username
 </%block>
      
 <%include file="/courseware/course_navigation.html" args="active_page='progress'" />
-<%
-progressList = []
-%>
-%for chapter in courseware_summary:
-%for section in chapter['sections']:
-
-<%
-earned = section.all_total.earned
-total = section.all_total.possible
-percentageString = "{0:.0%}".format(section.percent_graded)
-progressList.append(section.percent_graded)
-%>
-<span>${percentageString} | ${section.percent_graded}</span>
-<span style="color:red;"> ${"({0:.3n}/{1:.3n}) {2}".format( float(earned), float(total), percentageString )}</span>
-%endfor
-%endfor
-
-<%
-percentage = "{0:.0%}".format(sum(progressList))
-%>
-
-<span style="color:blue;">lista: ${percentage} | ${progressList} </span>
 
 <div class="border-top" id="content">
 <main style="margin: auto;" id="main" aria-label="Content" tabindex="-1">
