@@ -77,33 +77,31 @@ if course is not None:
 <%
 courseware_summary = get_course_progress(request, course, request.user)
 %>
+
 <%
-progressList = []
+progress_list = []
 %>
+
 %for chapter in courseware_summary:
 %for section in chapter['sections']:
 
 <%
-earned = section.all_total.earned
-total = section.all_total.possible
-percentageString = "{0:.0%}".format(section.percent_graded)
-progressList.append(section.percent_graded)
+progress_list.append(section.percent_graded)
 %>
-<!--<span>${percentageString} | ${section.percent_graded}</span>
-<span style="color:red;"> ${"({0:.3n}/{1:.3n}) {2}".format( float(earned), float(total), percentageString )}</span>-->
+
 %endfor
 %endfor
 
 <%
-percentage = "{0:.0%}".format(sum(progressList))
+percentage = "{0:.0%}".format(sum(progress_list))
 %>
 
 <div class="container d-flex justify-content-center align-items-center my-3 w-100">
     <div class="course-progress d-flex justify-content-center align-items-center flex-wrap w-75">
-        <p class="w-100">Postęp w kursie: <strong>${percentage} lekcji ukończonych</strong></p>
-        <div class="w-100 d-flex justify-content-between" style="position: relative;">
+        <p class="w-100">${_('Course progress')}: <strong>${percentage} ${_('finished lessons')}</strong></p>
+        <div class="w-100 d-flex justify-content-around" style="position: relative;">
             <div class="w-100 progress d-flex justify-content-start align-items-center">
-                <div class="progress-bar mx-2 w-${percentage}" role="progressbar" style="width: 50%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar mx-2" role="progressbar" style="width: ${percentage};" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <span class="align-self-center ml-1">${percentage}</span>
         </div>
