@@ -20,6 +20,7 @@ from third_party_auth import provider, pipeline
 	  let $jsEmailField = $('.js-email-field');
 	  let $jsPasswordField = $('.js-password-field');
 	  let $loginForm = $('#login-form');
+	  let $errorEmailPassword = $('.js-error-message');
 
     $(function() {
 
@@ -112,6 +113,7 @@ from third_party_auth import provider, pipeline
 				  $jsPasswordField.find('#password').removeAttr('aria-invalid').removeClass('error-field');
 				  $jsPasswordField.find('.js-error-message').text('');
 			  }
+			  $errorEmailPassword.before('<icon class="fa fa-exclamation-triangle mr-1 text-navoica-red">');
 		  }
 
         }
