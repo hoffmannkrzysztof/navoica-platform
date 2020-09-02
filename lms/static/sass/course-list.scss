@@ -11273,14 +11273,11 @@ article .display-3 {
     }
   }
 
-  #register-form .tip {
-    font-size: 0.875rem;
-    line-height: 2.0893;
-  }
-
-  #login-form .tip{
-    font-size: 1.125rem;
-    line-height: 2.0893;
+  #register-form ,#login-form {
+    .tip {
+      font-size: 0.875rem;
+      line-height: 2.0893;
+    }
   }
 
   #login-form {
@@ -14141,7 +14138,7 @@ footer a,
 
 /** ERROR FIELD **/
 input.form-control.form-control.error-field, .error-field, .error-field ~ .custom-control-label::before {
-  border: 2px solid #a11326;
+  border: 3px solid #e41d37;
 }
 
 .f-10 {
@@ -14165,4 +14162,4 @@ input.form-control.form-control.error-field, .error-field, .error-field ~ .custo
     color: #fff;
     background-color: #cf1930;
   }
-}    
+}
