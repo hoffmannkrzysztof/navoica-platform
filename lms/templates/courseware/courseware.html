@@ -124,8 +124,8 @@ ${HTML(fragment.foot_html())}
         $( document ).ready(function() {
             //let username = 'edx';
             //let course_id = "${course.id | n, js_escaped_string}";
-            let username = "bob";
-            let course_id = "edX/DemoX/Demo_Course";
+            let username = "edx";
+            let course_id = "course-v1:edX+DemoX+Demo_Course";
             let endpoint = `http://localhost:18000`;
             let apiKey = `/api/navoica/v0/progress/${username}/courses/${course_id}`;
             console.log('test', course_id, username);
@@ -133,9 +133,7 @@ ${HTML(fragment.foot_html())}
 
             $.ajax({
                 url: endpoint + apiKey,
-                headers: {
-                    'X-CSRFToken': $.cookie('csrftoken')
-                },
+                type: 'GET',
                 contentType: "application/json",
                 dataType: 'json',
                 success: function(result){
