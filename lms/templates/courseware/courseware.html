@@ -120,6 +120,32 @@ ${HTML(fragment.foot_html())}
 
 <div id="content" class="border-top">
 
+    <script>
+        $( document ).ready(function() {
+            //let username = 'edx';
+            //let course_id = "${course.id | n, js_escaped_string}";
+            let username = "bob";
+            let course_id = "edX/DemoX/Demo_Course";
+            let endpoint = `http://localhost:18000`;
+            let apiKey = `/api/navoica/v0/progress/${username}/courses/${course_id}`;
+            console.log('test', course_id, username);
+
+
+            $.ajax({
+                url: endpoint + apiKey,
+                headers: {
+                    'X-CSRFToken': $.cookie('csrftoken')
+                },
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    console.log(result);
+                }
+            })
+
+        });
+    </script>
+
 <main class="container"
   % if getattr(course, 'language'):
     lang="${course.language}"
