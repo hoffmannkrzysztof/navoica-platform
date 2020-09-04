@@ -1097,12 +1097,6 @@ def _progress(request, course_key, student_id):
     return response
 
 
-def get_course_progress(request, course, student):
-    course_grade = CourseGradeFactory().read(student, course)
-    courseware_summary = course_grade.chapter_grades.values()
-    return courseware_summary
-
-
 def _downloadable_certificate_message(course, cert_downloadable_status):
     if certs_api.has_html_certificates_enabled(course):
         if certs_api.get_active_web_certificate(course) is not None:

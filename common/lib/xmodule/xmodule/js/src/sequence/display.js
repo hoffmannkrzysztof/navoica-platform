@@ -1,12 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 /* globals Logger, interpolate */
 
+//import getCourseProgress from '../../../../../../../lms/static/js/api_frontend/courseware/getCourseProgress.js';
+
 (function() {
     'use strict';
 
     this.Sequence = (function() {
         function Sequence(element) {
             var self = this;
+
+            var $progressBar = $('.course-progress');
 
             this.removeBookmarkIconFromActiveNavItem = function(event) {
                 return Sequence.prototype.removeBookmarkIconFromActiveNavItem.apply(self, [event]);
@@ -64,6 +68,10 @@
             this.previousButtonClass = '.sequence-nav-button.button-previous';
             this.nextButtonClass = '.sequence-nav-button.button-next';
             this.base_page_title = ($('title').data('base-title') || '').trim();
+            this.user = $progressBar.data('user');
+            this.courseId = $progressBar.data('courseid');
+            this.urlOrigin = window.location.origin;
+            this.getCourseProgress = getCourseProgress.bind(this);
             this.bind();
             this.render(parseInt(this.el.data('position'), 10));
         }
@@ -253,6 +261,7 @@
 
                 // scroll to nav-tabs element
                 window.scrollTo(0, $("#nav-tab").offset().top-$('#header-navigation').height());
+                //this.getCourseProgress(this.user, this.courseId, this.urlOrigin);
             }
         };
 

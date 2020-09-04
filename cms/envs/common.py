@@ -1186,9 +1186,6 @@ INSTALLED_APPS = [
     # Entitlements, used in openedx tests
     'entitlements',
 
-    # Navoica API
-    'navoica_api',
-
     # Asset management for mako templates
     'pipeline_mako',
     # Machina related apps:

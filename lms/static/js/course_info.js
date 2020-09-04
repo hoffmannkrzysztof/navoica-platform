@@ -1,3 +1,5 @@
+import getCourseProgress from './api_frontend/courseware/getCourseProgress.js';
+
 $(document).ready(function() {
     $('ul.tabs li').click(function() {
         $('ul.tabs li').removeClass('enabled');
@@ -8,4 +10,6 @@ $(document).ready(function() {
         $('.tab').slideUp();
         $(data_class + ':hidden').slideDown();
     });
+
+    getCourseProgress();
 });
