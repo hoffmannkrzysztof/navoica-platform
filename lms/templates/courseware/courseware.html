@@ -126,13 +126,13 @@ ${HTML(fragment.foot_html())}
             //let course_id = "${course.id | n, js_escaped_string}";
             let username = "edx";
             let course_id = "course-v1:edX+DemoX+Demo_Course";
-            let endpoint = `http://localhost:18000`;
-            let apiKey = `/api/navoica/v0/progress/${username}/courses/${course_id}`;
+            let url = `http://localhost:18000`;
+            let endpoint = `/api/navoica/v0/progress/${username}/courses/${course_id}`;
             console.log('test', course_id, username);
 
 
             $.ajax({
-                url: endpoint + apiKey,
+                url: url + endpoint,
                 type: 'GET',
                 contentType: "application/json",
                 dataType: 'json',
