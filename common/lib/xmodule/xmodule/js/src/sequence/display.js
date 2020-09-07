@@ -71,7 +71,7 @@
             this.user = $progressBar.data('user');
             this.courseId = $progressBar.data('courseid');
             this.urlOrigin = window.location.origin;
-            this.getCourseProgress = getCourseProgress.bind(this);
+            //this.getCourseProgress = getCourseProgress.bind(this);
             this.bind();
             this.render(parseInt(this.el.data('position'), 10));
         }
