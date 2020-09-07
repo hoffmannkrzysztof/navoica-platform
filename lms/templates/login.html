@@ -8,7 +8,7 @@ import third_party_auth
 from third_party_auth import provider, pipeline
 %>
 
-<%block name="pagetitle">${_("Log into your {platform_name} Account").format(platform_name=platform_name)}</%block>
+<%block name="pagetitle">${_("Log in")}</%block>
 
 <%block name="bodyclass">view-loginn</%block>
 
@@ -96,10 +96,12 @@ from third_party_auth import provider, pipeline
 			  $loginInput.attr('aria-invalid', true).addClass('error-field');
 			  $('.js-error-message').text(json.value);
 		  } else {
-			  if ($email.val() === '') {
+        if ($email.val() === '') {
 				  $('.message.submission-error').removeClass('is-shown');
+          $('#error-icon-email').removeClass('d-none');
 				  $jsEmailField.find('#email').attr('aria-invalid', true).addClass('error-field');
 				  $jsEmailField.find('.js-error-message').text(_("Fill e-mail address"));
+
 			  } else {
 				  $jsEmailField.find('#email').removeAttr('aria-invalid').removeClass('error-field');
 				  $jsEmailField.find('.js-error-message').text('');
@@ -107,16 +109,18 @@ from third_party_auth import provider, pipeline
 
 			  if ($password.val() === '') {
 				  $('.message.submission-error').removeClass('is-shown');
-				  $jsPasswordField.find('#password').attr('aria-invalid', true).addClass('error-field');
+          $('#error-icon-password').removeClass('d-none');
+          $jsPasswordField.find('#password').attr('aria-invalid', true).addClass('error-field');
 				  $jsPasswordField.find('.js-error-message').text(_("Fill password"));
+         
 			  } else {
 				  $jsPasswordField.find('#password').removeAttr('aria-invalid').removeClass('error-field');
 				  $jsPasswordField.find('.js-error-message').text('');
 			  }
 			  $errorEmailPassword.before('<icon class="fa fa-exclamation-triangle mr-1 text-navoica-red">');
 		  }
-
-        }
+          
+        }        
       });
 
 		$loginInput.removeAttr('aria-invalid').removeClass('error-field');
@@ -250,14 +254,16 @@ from third_party_auth import provider, pipeline
 			<div class="form-group form-group-required field text js-email-field">
               <label for="email">E-mail <sup><span class="visible-hidden f-14">(${_('required')})</span></sup></label>
               <input class="form-control js-input-login" id="email" type="email" name="email" value="" spellcheck="false" placeholder="${_('example: username@domain.com')}" autocomplete="on" required aria-required="true" aria-describedby="emailHelp">
+              <i id="error-icon-email" class="fa fa-exclamation-triangle text-navoica-red mr-1 d-none"></i>
 				<small id="error-email" aria-atomic="true" aria-live="assertive" class="js-error-message text-navoica-red"></small>
-				<small id="emailHelp" class="tip tip-input form-text text-darkgrey">${_("This is the e-mail address you used to register with {platform}").format(platform=platform_name)}</small>
+				<small id="emailHelp" class="tip tip-input form-text text-darkgrey f-14">${_("This is the e-mail address you used to register with {platform}").format(platform=platform_name)}</small>
 			</div>
             <div class="form-group form-group-required field password js-password-field">
               <div class="d-flex justify-content-between align-items-center">
-                <label for="password">${_('Password')} <sup></i><span class="visible-hidden f-14">(${_('required')})</span></sup></label>
+                <label for="password">${_('Password')} <sup><span class="visible-hidden f-14">(${_('required')})</span></sup></label>
               </div>
               <input type="password" class="form-control js-input-login" id="password" name="password" value="" spellcheck="false" autocapitalize="off" required aria-required="true">
+              <i id="error-icon-password" class="fa fa-exclamation-triangle text-navoica-red mr-1 d-none"></i>
 				<small aria-atomic="true" aria-live="assertive" class="js-error-message text-navoica-red"></small>
             </div>
 		  </div>
