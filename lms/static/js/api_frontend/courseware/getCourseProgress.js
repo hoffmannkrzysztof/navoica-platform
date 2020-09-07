@@ -1,4 +1,3 @@
-
 function getCourseProgress(usernameArg, courseIdArg, urlOriginArg) {
     let $progressBar = $('.course-progress');
     let urlOriginPath = urlOriginArg || window.location.origin;

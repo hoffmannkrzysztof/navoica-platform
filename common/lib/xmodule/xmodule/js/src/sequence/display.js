@@ -1,8 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* globals Logger, interpolate */
 
-//import getCourseProgress from '../../../../../../../lms/static/js/api_frontend/courseware/getCourseProgress.js';
-
 (function() {
     'use strict';
 
@@ -10,7 +8,9 @@
         function Sequence(element) {
             var self = this;
 
-            var $progressBar = $('.course-progress');
+            this.getCourseProgress = function(event) {
+                return Sequence.prototype.getCourseProgress.apply(self, [event]);
+            };
 
             this.removeBookmarkIconFromActiveNavItem = function(event) {
                 return Sequence.prototype.removeBookmarkIconFromActiveNavItem.apply(self, [event]);
@@ -68,10 +68,6 @@
             this.previousButtonClass = '.sequence-nav-button.button-previous';
             this.nextButtonClass = '.sequence-nav-button.button-next';
             this.base_page_title = ($('title').data('base-title') || '').trim();
-            this.user = $progressBar.data('user');
-            this.courseId = $progressBar.data('courseid');
-            this.urlOrigin = window.location.origin;
-            //this.getCourseProgress = getCourseProgress.bind(this);
             this.bind();
             this.render(parseInt(this.el.data('position'), 10));
         }
@@ -88,6 +84,30 @@
             this.$('#sequence-list .nav-item').on('focus mouseenter', this.displayTabTooltip);
             this.$('#sequence-list .nav-item').on('blur mouseleave', this.hideTabTooltip);
         };
+
+        Sequence.prototype.getCourseProgress = function() {
+            let $progressBar = $('.course-progress');
+            let urlOriginPath = window.location.origin;
+            let username = $progressBar.data('user');
+            let courseId = $progressBar.data('courseid');
+            let endpoint = `/api/navoica/v1/progress/${username}/courses/${courseId}`;
+
+
+                $.ajax({
+                    url: urlOriginPath + endpoint,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(result){
+                        if (result) {
+                            let percentage = Math.round(result.completion_value * 100);
+                            $('.progress-bar').css('width', percentage + '%').attr('aria-valuenow', percentage);
+                            $('.js-percentage-progress').text(percentage + '%');
+                        }
+                    }
+                });
+
+        }
 
         Sequence.prototype.keyDownHandler = function(event) {
             if (!($(event.target).is("input") || $(event.target).is("textarea"))){
@@ -261,7 +281,7 @@
 
                 // scroll to nav-tabs element
                 window.scrollTo(0, $("#nav-tab").offset().top-$('#header-navigation').height());
-                //this.getCourseProgress(this.user, this.courseId, this.urlOrigin);
+                this.getCourseProgress();
             }
         };
 
