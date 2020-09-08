@@ -1,4 +1,4 @@
-import getCourseProgress from './api_frontend/courseware/getCourseProgress.js';
+import getCourseProgressEvents from './api_frontend/courseware/getCourseProgress.js';
 
 $(document).ready(function() {
     $('ul.tabs li').click(function() {
@@ -10,7 +10,6 @@ $(document).ready(function() {
         $('.tab').slideUp();
         $(data_class + ':hidden').slideDown();
     });
-
-    getCourseProgress();
-    //Sequence.prototype.getCourseProgress();
 });
+
+getCourseProgressEvents();
