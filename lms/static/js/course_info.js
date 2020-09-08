@@ -1,4 +1,4 @@
-import getCourseProgressEvents from './api_frontend/courseware/getCourseProgress.js';
+import getCourseProgressEvents from './courseware/get_course_progress.js';
 
 $(document).ready(function() {
     $('ul.tabs li').click(function() {
