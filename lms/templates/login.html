@@ -109,15 +109,15 @@ from third_party_auth import provider, pipeline
 
 			  if ($password.val() === '') {
 				  $('.message.submission-error').removeClass('is-shown');
-          $('#error-icon-password').removeClass('d-none');
-          $jsPasswordField.find('#password').attr('aria-invalid', true).addClass('error-field');
+                  $('#error-icon-password').removeClass('d-none');
+                  $jsPasswordField.find('#password').attr('aria-invalid', true).addClass('error-field');
 				  $jsPasswordField.find('.js-error-message').text(_("Fill password"));
          
 			  } else {
 				  $jsPasswordField.find('#password').removeAttr('aria-invalid').removeClass('error-field');
 				  $jsPasswordField.find('.js-error-message').text('');
 			  }
-			  $errorEmailPassword.before('<icon class="fa fa-exclamation-triangle mr-1 text-navoica-red">');
+			  //$errorEmailPassword.before('<icon class="fa fa-exclamation-triangle mr-1 text-navoica-red">');
 		  }
           
         }        
