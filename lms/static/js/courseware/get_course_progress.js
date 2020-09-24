@@ -28,7 +28,7 @@ function getCourseProgressReq(usernameArg, courseIdArg, urlOriginArg) {
 
     let endpoint = `/api/navoica/v1/progress/${username}/courses/${courseId}`;
 
-    if (courseId) {
+    if (courseId && username) {
         $.ajax({
             url: urlOriginPath + endpoint,
             type: 'GET',
