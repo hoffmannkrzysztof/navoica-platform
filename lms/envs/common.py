@@ -2313,9 +2313,8 @@ INSTALLED_APPS = [
 
     'xblock_jupyter_graded',
 
-    # Navoica API
-    'navoica_api',
 ]
+
 
 ######################### CSRF #########################################
 
