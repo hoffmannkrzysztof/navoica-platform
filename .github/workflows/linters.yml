@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ 2.7 ]
-        
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -21,18 +21,23 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pylint-celery==0.3  pylint-django==0.7.2 pylint-plugin-utils==0.2.6 pylint==1.7.1 edx-lint==0.5.4 configparser==3.5.0  astroid==1.5.2 backports.functools-lru-cache==1.5 click-log==0.1.8  mccabe==0.6.1   
+          pip install pylint-celery==0.3  pylint-django==0.7.2 pylint-plugin-utils==0.2.6 pylint==1.7.1 edx-lint==0.5.4 configparser==3.5.0  astroid==1.5.2 backports.functools-lru-cache==1.5 click-log==0.1.8  mccabe==0.6.1
       - id: files
         name: Run Pylint
         uses: jitterbit/get-changed-files@v1
       - run: |
-          echo ::set-env name=RESULT_PYLINT::$(pylint `find ${{ steps.files.outputs.added_modified }} -type f -name "*.py"`)
+          f=$(find ${{ steps.files.outputs.added_modified }} -type f -name "*.py" 2>/dev/null)
+          output=$(pylint $f)
+          output="${output//'%'/'%25'}"
+          output="${output//$'\n'/'%0A'}"
+          output="${output//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$output"
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
             Pylint Result:
             ```
-            ${{ env.RESULT_PYLINT }}
+            ${{ steps.files.outputs.changelog }}
             ```
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'

@@ -10,5 +10,4 @@ import os
 # Until we re-run pip install, the other copies of edx-platform could
 # take precedence, leading to some very strange results.
 sys.path.insert(0, os.path.dirname(__file__))
-
 from pavelib import *
