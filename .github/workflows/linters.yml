@@ -30,7 +30,7 @@ jobs:
           message: |
             Pylint Result:
             ```
-            ${{ $(pylint `find ${{ steps.files.outputs.added_modified }} -type f -name "*.py"`) }}
+            ${{ pylint `find ${{ steps.files.outputs.added_modified }} -type f -name "*.py"` }}
             ```
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
