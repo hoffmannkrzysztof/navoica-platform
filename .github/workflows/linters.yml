@@ -25,15 +25,12 @@ jobs:
       - id: files
         name: Run Pylint
         uses: jitterbit/get-changed-files@v1
-      - run: |
-          echo ::set-output name=RESULT_PYLINT::$(pylint `find ${{ steps.files.outputs.added_modified }} -type f -name "*.py"`)
-        id: pylint
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
             Pylint Result:
             ```
-            ${{ steps.pylint.outputs.RESULT_PYLINT }}
+            $(pylint `find ${{ steps.files.outputs.added_modified }} -type f -name "*.py"`)
             ```
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
