@@ -25,12 +25,18 @@ jobs:
       - id: files
         name: Run Pylint
         uses: jitterbit/get-changed-files@v1
+        run: |
+          output=$(pylint `find ${{ steps.files.outputs.added_modified }} -type f -name "*.py"`)
+          output="${output//'%'/'%25'}"
+          output="${output//$'\n'/'%0A'}"
+          output="${output//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$output"
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
             Pylint Result:
             ```
-            ${ pylint `find ${{ steps.files.outputs.added_modified }} -type f -name "*.py"` }
+            ${{ steps.files.outputs.changelog }}
             ```
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
