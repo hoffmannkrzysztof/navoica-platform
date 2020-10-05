@@ -26,7 +26,7 @@ jobs:
         name: Run Pylint
         uses: jitterbit/get-changed-files@v1
       - run: |
-          f=$(find ${{ steps.files.outputs.added_modified }} -type f -name "*.py")
+          f=$(find ${{ steps.files.outputs.added_modified }} -type f -name "*.py" 2>/dev/null)
           output=$(pylint $f)
           output="${output//'%'/'%25'}"
           output="${output//$'\n'/'%0A'}"
